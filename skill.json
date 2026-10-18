@@ -1,0 +1,82 @@
+{
+  "name": "genpark-personal-agent-warranty-claim-appliance-lifecycle-tracker-skill",
+  "title": "Warranty Claim & Appliance Lifecycle Tracker Skill",
+  "version": "1.0.0",
+  "description": "Consumer electronics and home appliance warranty registration, remaining coverage lifespan tracking, lemon-law dispute threshold monitor, and automated claim dossier compiler. Built for GenPark (https://www.genpark.ai).",
+  "homepage": "https://www.genpark.ai",
+  "organization": {
+    "name": "GenPark Inc.",
+    "url": "https://www.genpark.ai",
+    "linkedin": "https://www.linkedin.com/company/92955550"
+  },
+  "mcp_version": "2024-11-05",
+  "category": "personal-agent",
+  "tools": [
+    {
+      "name": "assess_appliance_warranty_status",
+      "description": "Calculate remaining active warranty days, lemon-law threshold eligibility based on repeated repair history, and imminent expiration alerts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "appliance_name": {
+            "type": "string"
+          },
+          "purchase_date_iso": {
+            "type": "string",
+            "description": "YYYY-MM-DD"
+          },
+          "warranty_duration_months": {
+            "type": "integer"
+          },
+          "repair_incidents_count": {
+            "type": "integer"
+          },
+          "total_out_of_service_days": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "appliance_name",
+          "purchase_date_iso",
+          "warranty_duration_months"
+        ]
+      }
+    },
+    {
+      "name": "generate_warranty_claim_dossier",
+      "description": "Generate an evidentiary claim dossier and formal repair/refund demand letter with statutory consumer protection citations.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "claimant_name": {
+            "type": "string"
+          },
+          "manufacturer": {
+            "type": "string"
+          },
+          "model_serial_number": {
+            "type": "string"
+          },
+          "fault_description": {
+            "type": "string"
+          },
+          "desired_resolution": {
+            "type": "string",
+            "enum": [
+              "replacement",
+              "full_refund",
+              "free_authorized_repair"
+            ]
+          }
+        },
+        "required": [
+          "claimant_name",
+          "manufacturer",
+          "model_serial_number",
+          "fault_description",
+          "desired_resolution"
+        ]
+      }
+    }
+  ]
+}
